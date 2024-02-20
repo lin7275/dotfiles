@@ -1,0 +1,173 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+set so=15 " Keep few lines visible when scrolling
+set incsearch
+set number relativenumber " Set relative line numbers
+set timeoutlen=400
+
+""" Editing and Reloading the Config
+" set clipboard+=unnamee
+" set clipboard+=ideaput
+set clipboard+=unnamedplus
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+" Use the system clipboard. (add by me)
+"" Common settings -------------------------
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+""" multiple-cursors plugin  --------------------------------
+" Emulates vim-multiple-cursors
+" Basic Commands:
+"   <C-n> start multicursor
+"   <C-n> next match
+"   <C-x> skip next match
+"   <C-p> remove current match and go back to previous one
+" See https://github.com/terryma/vim-multiple-cursors for details
+set multiple-cursors
+map mc <A-n>
+map mx <A-x>
+map mp <A-p>
+
+""" argtextobj  Plugin  --------------------------------
+" Emulates argtextobj. Provides a text-object 'a' for function arguments
+" Text object
+" ai
+" aa
+" See https://www.vim.org/scripts/script.php?script_id=2699 for details
+set argtextobj
+let g:argtextobj_pairs="[:],(:),<:>"
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'dbakker/vim-paragraph-motion'
+Plug 'kana/vim-textobj-entire'
+set quickscope
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
+
+""" NERDTree plugin  --------------------------------
+" Emulates NERDTree
+" Basic Commands:
+"   Ctrl-n  Open NERDTree (mapped bellow)
+"   q	    Close the NERDTree window
+"   o   	Open files, directories and bookmarks
+"   go   	Open selected file, but leave cursor in the NERDTree
+"   i   	Open selected file in a split window
+"   gi   	Same as i, but leave the cursor on the NERDTree
+"   s   	Open selected file in a new vsplit
+"   gs   	Same as s, but leave the cursor on the NERDTree
+"   <C-J>	Jump down to next sibling of the current directory
+"   <C-K>	Jump up to previous sibling of the current directory
+"   R	    Recursively refresh the current root
+"   m	    Display the NERDTree menu
+" See  https://github.com/JetBrains/ideavim/wiki/NERDTree-support for details
+set NERDTree
+map <c-n> :NERDTreeFocus<CR>
+
+let mapleader=" "
+""" Navigation
+nnoremap <c-\> :action SplitVertically<CR>
+nnoremap <c--> :action SplitHorizontally<CR>
+nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
+
+nnoremap <leader>n :action NewFile<CR>
+sethandler <c-j> a:vim
+sethandler <c-k> a:vim
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+
+nnoremap <TAB> :action PreviousTab<CR>
+nnoremap <s-TAB> :action NextTab<CR>
+
+"nnoremap <Leader>e :action EditSourceInNewWindow<CR>
+"sethandler <D-n> a:vim
+"nnoremap <D-n> :action NextWindow<CR>
+
+nnoremap ;q :action CloseContent<CR>
+nnoremap ;a :action CloseAllEditors<CR>
+
+
+""" Terminal
+nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
+""" Editing source code
+set ideajoin
+set idearefactormode=keep
+
+vnoremap < <gv
+vnoremap > >gv
+
+nnoremap [[ :action MethodUp<CR>
+nnoremap ]] :action MethodDown<CR>
+
+nnoremap zc :action CollapseRegion<CR>
+nnoremap zo :action ExpandRegion<CR>
+nnoremap <leader>zc :action CollapseAllRegions<CR>
+nnoremap <leader>zo :action ExpandAllRegions<CR>
+
+nnoremap <leader>c :action CommentByLineComment<CR>
+
+nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
+nnoremap <Leader>=  :action ReformatCode<CR>
+nnoremap <leader>o :action OptimizeImports<CR>
+
+nnoremap <c-r> :action RecentFiles<CR>
+nnoremap <leader>l :action RecentLocations<CR>
+nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
+
+nnoremap ge :action GotoNextError<CR>
+nnoremap gE :action GotoPreviousError<CR>
+
+nnoremap <leader>s :write<CR>
+
+
+""" Searching and Source Code Navigation
+set incsearch
+
+nnoremap <c-/> :action FindInPath<CR>
+nnoremap <c-a> :action GotoAction<CR>
+nnoremap <c-f> :action GotoFile<CR>
+nnoremap <leader>u :action FindUsages<CR>
+
+"nnoremap <leader>s :action GotoRelated<CR>
+nnoremap <leader>h :action CallHierarchy<CR>
+nnoremap <leader>b :action ShowNavBar<CR>
+nnoremap <c-s> :action FileStructurePopup<CR>
+nnoremap gs :action GotoSymbol<CR>
+"nnoremap gc :action GotoClass<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gp :action GotoSuperMethod<CR>
+nnoremap gt :action GotoTest<CR>
+nnoremap gb :action Back<CR>
+nnoremap gf :action Forward<CR>
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
