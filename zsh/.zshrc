@@ -116,3 +116,5 @@ export NNN_FIFO="/tmp/nnn.fifo"
 export TERMINAL=tmux
 export NNN_BMS="h:~;d:~/Downloads/;D:~/Documents/;c:~/.config/;"
 alias vim=nvim
+export EDITOR=~/nvim.appimage
+alias tmux='tmux -a ~/.config/tmux/tmux.conf'
