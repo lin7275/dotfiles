@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+if [ -z "$NNN_FIFO" ]; then
+	exit 1
+fi
+
+while read FILE; do
+	printf "%s" "$FILE" | xclip -selection clipboard
+done <"$NNN_FIFO" &
+# disown
