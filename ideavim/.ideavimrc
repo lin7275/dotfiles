@@ -144,13 +144,14 @@ set incsearch
 
 nnoremap <c-/> :action FindInPath<CR>
 nnoremap <c-a> :action GotoAction<CR>
+nnoremap <c-s> :action GotoSymbol<CR>
 nnoremap <c-f> :action GotoFile<CR>
 nnoremap <leader>u :action FindUsages<CR>
 
 "nnoremap <leader>s :action GotoRelated<CR>
 nnoremap <leader>h :action CallHierarchy<CR>
 nnoremap <leader>b :action ShowNavBar<CR>
-nnoremap <c-s> :action FileStructurePopup<CR>
+" nnoremap <c-s> :action FileStructurePopup<CR>
 nnoremap gs :action GotoSymbol<CR>
 "nnoremap gc :action GotoClass<CR>
 nnoremap gi :action GotoImplementation<CR>
@@ -160,6 +161,7 @@ nnoremap gt :action GotoTest<CR>
 nnoremap gb :action Back<CR>
 nnoremap gf :action Forward<CR>
 
+nnoremap yg :%y<CR>
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
@@ -171,3 +173,11 @@ nnoremap gf :action Forward<CR>
 "" Map \b to toggle the breakpoint on the current line
 "map \b <Action>(ToggleLineBreakpoint)
 
+filetype plugin indent on
+set autoindent
+set smartindent
+set foldmethod=indent
+nnoremap <F10> zi
+
+nnoremap g; :action JumpToLastChange<CR>
+nnoremap g, :action JumpToNextChange<CR>
